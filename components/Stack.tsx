@@ -10,6 +10,7 @@ const stack = [
   { name: "Vercel",      logo: "/logos/vercel.svg" },
   { name: "Framer",      logo: "/logos/framer.svg" },
   { name: "GitHub",      logo: "/logos/github.svg" },
+  { name: "Claude Code", logo: "/logos/claude.svg" },
 ];
 
 export default function Stack() {
