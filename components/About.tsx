@@ -64,7 +64,7 @@ const toolGroups: { title: string; tools: Tool[] }[] = [
   },
 ];
 
-export default function About() {
+export default function About({ contact }: { contact?: React.ReactNode }) {
   return (
     <section id="about" className="py-32 px-6">
       <div className="max-w-4xl mx-auto">
@@ -100,6 +100,22 @@ export default function About() {
             the current solutions that hold a monopoly over the market.
           </p>
         </motion.div>
+
+        {/* Contact (only where a caller supplies it, e.g. the orb's About panel) */}
+        {contact && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className="grid grid-cols-1 sm:grid-cols-[9rem_1fr] gap-x-6 gap-y-3 mb-16"
+          >
+            <h3 className="font-mono text-[11px] text-[#60a5fa] uppercase tracking-wider pt-1">
+              Contact
+            </h3>
+            <div>{contact}</div>
+          </motion.div>
+        )}
 
         {/* At a glance */}
         <motion.div

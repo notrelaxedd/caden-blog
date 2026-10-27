@@ -29,12 +29,12 @@ export type Face = {
 };
 
 export const FACES: Record<string, Face> = {
-  hapbe: { label: "HapBe", tier: "big", hue: 268, icon: Vibrate, mono: "HB", photo: null }, // hapbe-1 is a white CAD render
+  hapbe: { label: "HapBe", tier: "big", hue: 172, icon: Vibrate, mono: "HB", photo: null, logo: "/orbs/hapbe.png" }, // hapbe-1 is a white CAD render; logo cut out of its white background
   rowtech: { label: "RowTech", tier: "big", hue: 24, icon: Activity, mono: "RT", photo: 0, photoPosition: "50% 32%" }, // rowtech-1: hub display, orange cable
   bikecomputer: { label: "BikeComputer", tier: "small", hue: 205, icon: Bike, mono: "BC", photo: 1, photoPosition: "50% 45%", photoOpacity: 0.45 }, // bikecomputer-2: powered on
   "rc-jetboat": { label: "RC Jetboat", tier: "small", hue: 32, icon: Ship, mono: "RJ", photo: 0, photoPosition: "42% 45%" }, // jetboat-1: sunset lake
   "trading-cluster": { label: "Trading Cluster", tier: "small", hue: 192, icon: Server, mono: "AT", photo: 0, photoPosition: "50% 50%" }, // cluster-1: dark cyan dashboard
-  lecturly: { label: "Lecturly", tier: "big", hue: 160, icon: GraduationCap, mono: "LY", photo: 0, photoSrc: "/orbs/lecturly-1-orb.webp", photoPosition: "50% 50%" }, // lecturly-1 hero: the headline spans its middle, so the orb uses a text-free classroom crop of it (index 2 is a white page)
+  lecturly: { label: "Lecturly", tier: "big", hue: 160, icon: GraduationCap, mono: "LY", photo: 0, logo: "/orbs/lecturly.png", photoSrc: "/orbs/lecturly-1-orb.webp", photoPosition: "50% 50%" }, // lecturly-1 hero: the headline spans its middle, so the orb uses a text-free classroom crop of it (index 2 is a white page)
   emmetts: { label: "Emmett's", tier: "big", hue: 135, icon: TreePine, mono: "EP", photo: null, logo: "/orbs/emmetts-logo-light.png" },
 };
 

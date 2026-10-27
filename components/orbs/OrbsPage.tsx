@@ -120,8 +120,8 @@ export default function OrbsPage() {
               caden polk
             </a>
             <nav className="flex items-center gap-3.5 sm:gap-6">
-              <a href="/" className="text-[#555] hover:text-[#f0f0f0] transition-colors whitespace-nowrap">
-                ← home
+              <a href="/projects" className="text-[#555] hover:text-[#f0f0f0] transition-colors whitespace-nowrap">
+                list view →
               </a>
               <a
                 href="/Caden_Polk_Engineering_Portfolio.pdf"

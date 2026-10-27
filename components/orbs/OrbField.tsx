@@ -85,7 +85,6 @@ export default function OrbField({ selected, onSelect, onClose, rightInset, skip
           <span className={styles.hintMouse}>drag to fling · click to open</span>
           <span className={styles.hintTouch}>drag an orb · tap to open</span>
         </span>
-        <span>/orbs — prototype</span>
       </div>
     </div>
   );

@@ -1,8 +1,9 @@
 "use client";
 
 import About from "@/components/About";
+import ContactCards from "@/components/ContactCards";
 
-/** Identity header plus the existing <About/> rendered unchanged inside an override wrapper (§5.4). */
+/** Identity header plus the existing <About/> (with the contact cards under the design philosophy) inside an override wrapper (§5.4). */
 export default function AboutPanel() {
   return (
     <div>
@@ -11,31 +12,11 @@ export default function AboutPanel() {
           Caden Polk
         </h2>
         <p className="text-[#555]">Electrical / Mechanical Engineer &amp; Founder</p>
-        <div className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-[11px] text-[#555] mt-1">
-          <a href="/#contact" className="hover:text-[#f0f0f0] transition-colors">
-            Get in touch →
-          </a>
-          <a
-            href="/Caden_Polk_Engineering_Portfolio.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[#f0f0f0] transition-colors"
-          >
-            Portfolio (PDF)
-          </a>
-          <a
-            href="https://x.com/notrelaxedd"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[#f0f0f0] transition-colors"
-          >
-            @notrelaxedd
-          </a>
-        </div>
+        <p className="font-mono text-[11px] text-[#444]">Rocky River, Ohio</p>
       </div>
 
       <div className="[&>section]:!py-6 [&>section]:!px-0 [&_h2]:hidden">
-        <About />
+        <About contact={<ContactCards compact />} />
       </div>
     </div>
   );

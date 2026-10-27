@@ -1,19 +1,12 @@
 import Background from "@/components/Background";
-import Nav from "@/components/Nav";
-import Hero from "@/components/Hero";
-import Projects from "@/components/Projects";
-import About from "@/components/About";
-import Contact from "@/components/Contact";
+import OrbsPage from "@/components/orbs/OrbsPage";
 
+/** The orbs are the home page. The long-form version of the site lives at /projects. */
 export default function Home() {
   return (
-    <main>
+    <main className="h-dvh overflow-hidden">
       <Background />
-      <Nav />
-      <Hero />
-      <About />
-      <Projects />
-      <Contact />
+      <OrbsPage />
     </main>
   );
 }

@@ -60,10 +60,10 @@ export default function ProjectPanel({ project, face }: Props) {
           </a>
         )}
         <a
-          href={`/#${project.slug}`}
+          href={`/projects#${project.slug}`}
           className="font-mono text-[11px] text-[#555] hover:text-[#f0f0f0] transition-colors"
         >
-          Full write-up on the home page →
+          Full write-up →
         </a>
       </div>
 

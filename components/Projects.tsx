@@ -9,11 +9,14 @@ import { projects, type Project } from "@/lib/projects";
 function ProjectRow({ project, index }: { project: Project; index: number }) {
   const [open, setOpen] = useState(false);
 
-  // Deep links like /#rowtech open that project.
+  // Deep links like /projects#rowtech open that project, on load and on a same-page hash change.
   useEffect(() => {
-    if (typeof window !== "undefined" && window.location.hash === `#${project.slug}`) {
-      setOpen(true);
-    }
+    const check = () => {
+      if (window.location.hash === `#${project.slug}`) setOpen(true);
+    };
+    check();
+    window.addEventListener("hashchange", check);
+    return () => window.removeEventListener("hashchange", check);
   }, [project.slug]);
 
   const panelId = `${project.slug}-details`;

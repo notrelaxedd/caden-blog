@@ -29,7 +29,7 @@ export default function Nav() {
       }`}
     >
       <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
-        <a href="#" className="font-mono text-[13px] sm:text-sm text-[#555] hover:text-[#f0f0f0] transition-colors whitespace-nowrap mr-4">
+        <a href="/" className="font-mono text-[13px] sm:text-sm text-[#555] hover:text-[#f0f0f0] transition-colors whitespace-nowrap mr-4">
           caden polk
         </a>
         <nav className="flex items-center gap-3.5 sm:gap-6">

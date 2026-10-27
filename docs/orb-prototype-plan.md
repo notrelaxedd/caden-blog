@@ -1,5 +1,7 @@
 # /orbs prototype — implementation plan
 
+> **Update:** the orbs are now the site's root page (`/`); `/orbs` redirects there, and the long-form page moved to `/projects`. HapBe and Lecturly have real logos in `public/orbs/`, and the About panel shows the contact cards under the design philosophy.
+
 **Design:** Constellation (dark-glass orbs on a breathing orbit), with the judges' grafts folded in.
 **Repo:** `/home/user/caden-blog` (Next.js 16.2 App Router, React 19.2, TypeScript strict, Tailwind 3.4.19, framer-motion 11.18, lucide-react 0.468).
 **New dependencies:** none. The physics is a ~230-line custom fixed-step integrator; matter-js was rejected (see §3.1).
