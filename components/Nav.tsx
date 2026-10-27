@@ -5,8 +5,9 @@ import { motion } from "framer-motion";
 
 const links = [
   { label: "projects", href: "#projects" },
-  { label: "stack", href: "#stack" },
+  { label: "about", href: "#about" },
   { label: "contact", href: "#contact" },
+  { label: "pdf", href: "/Caden_Polk_Engineering_Portfolio.pdf", external: true },
 ];
 
 export default function Nav() {
@@ -28,15 +29,17 @@ export default function Nav() {
       }`}
     >
       <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
-        <a href="#" className="font-mono text-sm text-[#555] hover:text-[#f0f0f0] transition-colors">
-          cp
+        <a href="#" className="font-mono text-[13px] sm:text-sm text-[#555] hover:text-[#f0f0f0] transition-colors whitespace-nowrap mr-4">
+          caden polk
         </a>
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-3.5 sm:gap-6">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-[#555] hover:text-[#f0f0f0] transition-colors font-mono"
+              target={l.external ? "_blank" : undefined}
+              rel={l.external ? "noopener noreferrer" : undefined}
+              className="text-[13px] sm:text-sm text-[#555] hover:text-[#f0f0f0] transition-colors font-mono"
             >
               {l.label}
             </a>

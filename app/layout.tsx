@@ -15,13 +15,13 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Caden Polk — Startup Founder & Engineer",
+  title: "Caden Polk — Electrical / Mechanical Engineer & Founder",
   description:
-    "I make things that increase personal efficiency or help those in need.",
+    "Electrical and mechanical engineer in Rocky River, Ohio. I build cheaper, better alternatives to overpriced products: assistive hardware, data tools for crew athletes, and software for teachers and small businesses.",
   openGraph: {
-    title: "Caden Polk",
+    title: "Caden Polk — Electrical / Mechanical Engineer & Founder",
     description:
-      "I make things that increase personal efficiency or help those in need.",
+      "Assistive hardware, data tools for crew athletes, and software for teachers and small businesses. HapBe, RowTech, Lecturly, and more.",
     type: "website",
   },
 };

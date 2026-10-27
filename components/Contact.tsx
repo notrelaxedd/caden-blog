@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import ContactForm from "./ContactForm";
+import { FileText } from "lucide-react";
 
 const socials = [
   {
@@ -35,6 +35,12 @@ const socials = [
     href: "mailto:notrelaxedd@gmail.com",
     logo: null,
   },
+  {
+    label: "Portfolio",
+    handle: "PDF",
+    href: "/Caden_Polk_Engineering_Portfolio.pdf",
+    logo: null,
+  },
 ];
 
 export default function Contact() {
@@ -52,38 +58,43 @@ export default function Contact() {
           Contact
         </motion.h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="text-[#888] text-base mb-8 leading-relaxed max-w-xl">
+            I&apos;m on everything as{" "}
+            <span className="text-[#f0f0f0]">@notrelaxedd</span>. Pick a
+            platform, or email me directly. Based in Rocky River, Ohio.
+          </p>
 
-          {/* Left — socials */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <p className="text-[#888] text-base mb-8 leading-relaxed">
-              I&apos;m on everything as{" "}
-              <span className="text-[#f0f0f0]">@notrelaxedd</span>.
-              Pick a platform or use the form.
-            </p>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3">
-              {socials.map((s) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {socials.map((s) => {
+              const external = s.href.startsWith("http");
+              return (
                 <a
                   key={s.label}
                   href={s.href}
-                  target={s.href.startsWith("mailto") ? undefined : "_blank"}
-                  rel="noopener noreferrer"
+                  target={external || s.href.endsWith(".pdf") ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
                   className="group flex flex-col gap-3 border border-[#1e1e1e] bg-[#111] rounded-lg p-4 hover:border-[#333] hover:bg-[#161616] transition-all duration-150"
                 >
                   <div className="w-8 h-8 flex items-center justify-center">
                     {s.logo ? (
                       <Image
                         src={s.logo}
-                        alt={s.label}
+                        alt=""
                         width={20}
                         height={20}
                         className="object-contain opacity-60 group-hover:opacity-90 transition-opacity"
+                      />
+                    ) : s.label === "Portfolio" ? (
+                      <FileText
+                        size={20}
+                        className="text-[#555] group-hover:text-[#888] transition-colors"
+                        aria-hidden="true"
                       />
                     ) : (
                       /* Email — inline envelope icon */
@@ -97,6 +108,7 @@ export default function Contact() {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         className="text-[#555] group-hover:text-[#888] transition-colors"
+                        aria-hidden="true"
                       >
                         <rect x="2" y="4" width="20" height="16" rx="2" />
                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
@@ -112,24 +124,10 @@ export default function Contact() {
                     </p>
                   </div>
                 </a>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right — form */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <p className="text-[#888] text-base mb-1 leading-relaxed">
-              Or send a message directly.
-            </p>
-            <ContactForm />
-          </motion.div>
-
-        </div>
+              );
+            })}
+          </div>
+        </motion.div>
       </div>
 
       {/* Footer */}

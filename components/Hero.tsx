@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { FileText } from "lucide-react";
 
 const container = {
   hidden: {},
@@ -26,10 +27,15 @@ export default function Hero() {
             Caden Polk
           </motion.h1>
 
-          {/* Role + handle */}
-          <motion.div variants={item} className="flex items-center gap-4 mb-10">
-            <span className="text-base text-[#555]">Founder &amp; Engineer</span>
-            <span className="text-[#2a2a2a]">—</span>
+          {/* Role + handle + location */}
+          <motion.div
+            variants={item}
+            className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-10"
+          >
+            <span className="text-base text-[#555]">
+              Electrical / Mechanical Engineer &amp; Founder
+            </span>
+            <span className="text-[#2a2a2a] hidden sm:inline">—</span>
             <a
               href="https://x.com/notrelaxedd"
               target="_blank"
@@ -38,24 +44,38 @@ export default function Hero() {
             >
               @notrelaxedd
             </a>
+            <span className="text-[#2a2a2a] hidden sm:inline">—</span>
+            <span className="font-mono text-sm text-[#444]">Rocky River, Ohio</span>
           </motion.div>
 
           {/* Bio */}
           <motion.p
             variants={item}
-            className="text-[#888] text-lg leading-relaxed max-w-lg mb-12"
+            className="text-[#888] text-lg leading-relaxed max-w-xl mb-12"
           >
-            I build things that either help people or get out of their way.
-            Right now that means assistive hardware and tools for teachers.
+            Technology grows faster than most people&apos;s understanding of it,
+            so a lot of products get away with charging far more than they
+            should. Most of what I build is a cheaper, better alternative to one
+            of those: assistive hardware, data tools for crew athletes, and
+            software for teachers and small businesses.
           </motion.p>
 
           {/* CTAs */}
-          <motion.div variants={item} className="flex items-center gap-6">
+          <motion.div variants={item} className="flex flex-wrap items-center gap-x-6 gap-y-4">
             <a
               href="#projects"
               className="text-sm font-medium text-[#f0f0f0] border border-[#2a2a2a] px-5 py-2.5 rounded hover:border-[#444] hover:bg-[#161616] transition-all duration-150"
             >
               See the work
+            </a>
+            <a
+              href="/Caden_Polk_Engineering_Portfolio.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-[#555] hover:text-[#f0f0f0] transition-colors"
+            >
+              <FileText size={14} aria-hidden="true" />
+              Portfolio (PDF)
             </a>
             <a
               href="#contact"
