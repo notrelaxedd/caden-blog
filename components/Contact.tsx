@@ -31,8 +31,8 @@ const socials = [
   },
   {
     label: "Email",
-    handle: "notrelaxedd@gmail.com",
-    href: "mailto:notrelaxedd@gmail.com",
+    handle: "caden@cadenpolk.com",
+    href: "mailto:caden@cadenpolk.com",
     logo: null,
   },
   {

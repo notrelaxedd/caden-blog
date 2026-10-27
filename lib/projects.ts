@@ -260,7 +260,7 @@ export const projects: Project[] = [
     number: "04",
     title: "RC Jetboat",
     category: "Marine / embedded systems",
-    years: "2026–present",
+    years: "2024–present",
     role: "Designer and builder",
     status: "In progress",
     summary:
