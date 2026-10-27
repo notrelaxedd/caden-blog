@@ -1,0 +1,430 @@
+/* /orbs — orb faces, stage and chrome. Hex values are the site's (#0c0c0c, #1e1e1e, #60a5fa).
+   Ownership rule: the physics loop writes `transform` on .orb only; every transition lives on
+   .inner/.photo/.body. Never put a transition on .orb. */
+
+/* ---- stage ---- */
+.stage {
+  --s: 1; /* effective orb scale (fit × ringFit); the hook writes it at relayout, the in-orb type is calc()ed from it */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  overscroll-behavior: none;
+}
+
+.guide {
+  stroke: #161616;
+  stroke-width: 1;
+  stroke-dasharray: 2 8;
+  fill: none;
+}
+
+.line {
+  stroke: #1c1c1c;
+  stroke-width: 1;
+}
+.line[data-selected="true"] {
+  stroke: #60a5fa;
+  opacity: 0.5;
+}
+
+/* ---- orb shell ---- */
+.orb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 9999px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity 0.4s;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 1;
+}
+.ready .orb {
+  opacity: 1;
+}
+.orb[data-tier="big"],
+.orb[data-tier="center"] {
+  z-index: 2;
+}
+@media (hover: hover) {
+  .orb:hover {
+    z-index: 3;
+  }
+}
+.orb[data-selected="true"] {
+  z-index: 4;
+}
+.orb[data-held="true"] {
+  z-index: 5;
+  cursor: grabbing;
+}
+.orb:focus {
+  outline: none;
+}
+.orb:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 4px;
+}
+
+.orb img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+
+/* ---- layers ---- */
+.inner {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (hover: hover) {
+  .orb:hover .inner {
+    transform: scale(1.06);
+  }
+  .orb[data-kind="center"]:hover .inner {
+    transform: scale(1.03);
+  }
+}
+.orb[data-selected="true"] .inner,
+.orb[data-kind="center"][data-selected="true"] .inner {
+  transform: scale(1.12);
+}
+
+.body,
+.centerBody,
+.photo,
+.tint,
+.gloss,
+.sheen,
+.squash {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* step 13: the hook writes a velocity squash here (visual layers only; .content stays undeformed) */
+.squash {
+  will-change: transform;
+}
+
+.body {
+  background: radial-gradient(circle at 35% 28%, #272727 0%, #141414 42%, #0a0a0a 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    inset 0 -22px 34px rgba(0, 0, 0, 0.6),
+    0 0 0 1px #1e1e1e,
+    0 28px 48px -24px rgba(0, 0, 0, 0.9),
+    0 0 48px -10px hsl(var(--hue) 45% 60% / 0.22);
+  transition: box-shadow 0.35s;
+}
+@media (hover: hover) {
+  .orb:hover .body {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.09),
+      inset 0 -22px 34px rgba(0, 0, 0, 0.6),
+      0 0 0 1px #1e1e1e,
+      0 28px 48px -24px rgba(0, 0, 0, 0.9),
+      0 0 64px -10px hsl(var(--hue) 45% 60% / 0.4);
+  }
+}
+.orb[data-selected="true"] .body {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    inset 0 -22px 34px rgba(0, 0, 0, 0.6),
+    0 0 0 1px #1e1e1e,
+    0 0 0 2px #60a5fa,
+    0 28px 48px -24px rgba(0, 0, 0, 0.9),
+    0 0 64px -10px rgba(96, 165, 250, 0.45);
+}
+
+.photo {
+  overflow: hidden;
+  opacity: var(--photo-opacity, 0.55);
+  filter: saturate(0.25) brightness(0.55) contrast(1.05);
+  -webkit-mask-image: radial-gradient(circle, #000 52%, transparent 72%);
+  mask-image: radial-gradient(circle, #000 52%, transparent 72%);
+  transition:
+    opacity 0.4s,
+    filter 0.4s;
+}
+@media (hover: hover) {
+  .orb:hover .photo {
+    opacity: 0.85;
+    filter: saturate(0.95) brightness(0.7);
+  }
+}
+.photo img {
+  object-fit: cover;
+  object-position: var(--photo-pos, 50% 50%);
+}
+
+.tint {
+  background: radial-gradient(circle at 50% 115%, hsl(var(--hue) 45% 55% / 0.3), transparent 58%);
+}
+.gloss {
+  background: radial-gradient(ellipse 60% 40% at 30% 20%, rgba(255, 255, 255, 0.13), transparent);
+}
+
+/* ---- content ---- */
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: max(3px, calc(6px * var(--s)));
+  padding: 0 12%;
+  text-align: center;
+  pointer-events: none;
+}
+/* Type is sized from the orb (the fit scale), not the viewport, with legibility floors; §4.1 values at s = 1 */
+.name {
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-weight: 600;
+  font-size: max(8px, calc(14px * var(--s)));
+  line-height: 1.15;
+  color: #f0f0f0;
+  text-wrap: balance;
+}
+.orb[data-tier="small"] .name {
+  font-size: max(8px, calc(12px * var(--s)));
+}
+.caption {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: max(7px, calc(9px * var(--s)));
+  letter-spacing: 0.08em;
+  color: #666;
+}
+
+/* mark sizing inside an orb (panel headers pass an explicit px size instead) */
+.mark {
+  width: calc(44px * var(--s));
+  height: calc(44px * var(--s));
+}
+.orb[data-tier="small"] .mark {
+  width: calc(36px * var(--s));
+  height: calc(36px * var(--s));
+}
+.markLogo {
+  width: calc(46% / 0.76); /* 46 % of the orb: a flex item's % resolves against .content minus its 2 × 12 % padding */
+  aspect-ratio: 1 / 1;
+}
+
+/* ---- compact face: the name moves to a rim pill, the mark grows (36 / 30 px on a 390 px phone) ----
+   Used below md (§4.1) and, via data-compact from the hook, whenever the effective scale is below
+   P.COMPACT_FIT, i.e. the orbs are too small for in-orb names (a landscape phone). */
+.pill {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: calc(100% - 10px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  border: 1px solid #1e1e1e;
+  background: rgba(12, 12, 12, 0.9);
+  border-radius: 9999px;
+  padding: 2px 8px;
+  font: 10px ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+  pointer-events: none;
+}
+@media (max-width: 767px) {
+  .orb[data-kind="project"] .name,
+  .caption {
+    display: none;
+  }
+  .mark {
+    width: calc(54px * var(--s));
+    height: calc(54px * var(--s));
+  }
+  .orb[data-tier="small"] .mark {
+    width: calc(45px * var(--s));
+    height: calc(45px * var(--s));
+  }
+  .pill {
+    display: block;
+  }
+}
+.stage[data-compact="true"] .orb[data-kind="project"] .name,
+.stage[data-compact="true"] .caption {
+  display: none;
+}
+.stage[data-compact="true"] .mark {
+  width: calc(54px * var(--s));
+  height: calc(54px * var(--s));
+}
+.stage[data-compact="true"] .orb[data-tier="small"] .mark {
+  width: calc(45px * var(--s));
+  height: calc(45px * var(--s));
+}
+.stage[data-compact="true"] .pill {
+  display: block;
+}
+
+/* ---- the central orb ---- */
+.centerBody {
+  background: radial-gradient(circle at 35% 28%, #1b2638 0%, #0e141f 48%, #080a0e 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -28px 44px rgba(0, 0, 0, 0.65),
+    0 0 0 1px #1e2a3a,
+    0 36px 60px -28px rgba(0, 0, 0, 0.95),
+    0 0 110px -16px rgba(96, 165, 250, 0.45);
+  transition: box-shadow 0.35s;
+}
+@media (hover: hover) {
+  .orb:hover .centerBody {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      inset 0 -28px 44px rgba(0, 0, 0, 0.65),
+      0 0 0 1px #1e2a3a,
+      0 36px 60px -28px rgba(0, 0, 0, 0.95),
+      0 0 110px -16px rgba(96, 165, 250, 0.6);
+  }
+}
+.orb[data-selected="true"] .centerBody {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -28px 44px rgba(0, 0, 0, 0.65),
+    0 0 0 1px #1e2a3a,
+    0 0 0 2px #60a5fa,
+    0 36px 60px -28px rgba(0, 0, 0, 0.95),
+    0 0 110px -16px rgba(96, 165, 250, 0.6);
+}
+.sheen {
+  background: conic-gradient(from 0deg, transparent 0 70%, rgba(96, 165, 250, 0.1) 85%, transparent);
+  animation: sheenSpin 22s linear infinite;
+}
+@keyframes sheenSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.orb[data-kind="center"] .content {
+  padding: 0 7%;
+  gap: max(3px, calc(5px * var(--s)));
+}
+/* §4.5 sizes at s = 1 (28 / 10 / 10 / 10 px), 18 / 9 / 9 px on a 390 px phone (s .66), with floors */
+.centerName {
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-weight: 700;
+  font-size: max(12px, calc(28px * var(--s)));
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #f0f0f0;
+  white-space: nowrap;
+}
+.centerRole {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: max(9px, calc(10px * var(--s)));
+  text-transform: uppercase;
+  letter-spacing: clamp(0.08em, calc(0.16em * var(--s)), 0.16em);
+  color: #60a5fa;
+  white-space: nowrap;
+}
+.centerLoc {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: max(9px, calc(10px * var(--s)));
+  color: #555;
+  white-space: nowrap;
+}
+.centerCue {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14%;
+  text-align: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: max(9px, calc(10px * var(--s)));
+  color: #444;
+  transition: color 0.3s;
+}
+@media (hover: hover) {
+  .orb:hover .centerCue {
+    color: #f0f0f0;
+  }
+}
+@media (max-width: 767px) {
+  .centerRole {
+    letter-spacing: 0.08em;
+  }
+  .centerCue {
+    display: none;
+  }
+}
+/* compact sun (e.g. an 86 px sun on a landscape phone): the name alone fits */
+.stage[data-compact="true"] .centerRole,
+.stage[data-compact="true"] .centerLoc,
+.stage[data-compact="true"] .centerCue {
+  display: none;
+}
+
+/* ---- hint band ---- */
+.hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  pointer-events: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #333;
+}
+.hintMouse {
+  display: none;
+}
+.hintTouch {
+  display: inline;
+}
+@media (hover: hover) {
+  .hintMouse {
+    display: inline;
+  }
+  .hintTouch {
+    display: none;
+  }
+}
+
+/* ---- reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .inner,
+  .photo,
+  .body,
+  .centerBody,
+  .centerCue {
+    transition: none;
+  }
+  .orb:hover .inner {
+    transform: none;
+  }
+  .orb:hover .photo {
+    /* no photo wake (§7): the resting glass values */
+    opacity: var(--photo-opacity, 0.55);
+    filter: saturate(0.25) brightness(0.55) contrast(1.05);
+  }
+  .sheen {
+    animation: none;
+  }
+}
