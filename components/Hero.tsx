@@ -48,18 +48,6 @@ export default function Hero() {
             <span className="font-mono text-sm text-[#444]">Rocky River, Ohio</span>
           </motion.div>
 
-          {/* Bio */}
-          <motion.p
-            variants={item}
-            className="text-[#888] text-lg leading-relaxed max-w-xl mb-12"
-          >
-            Technology grows faster than most people&apos;s understanding of it,
-            so a lot of products get away with charging far more than they
-            should. Most of what I build is a cheaper, better alternative to one
-            of those: assistive hardware, data tools for crew athletes, and
-            software for teachers and small businesses.
-          </motion.p>
-
           {/* CTAs */}
           <motion.div variants={item} className="flex flex-wrap items-center gap-x-6 gap-y-4">
             <a
