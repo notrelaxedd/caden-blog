@@ -19,8 +19,8 @@ const socials = [
   },
   {
     label: "Instagram",
-    handle: "@notrelaxedd",
-    href: "https://instagram.com/notrelaxedd",
+    handle: "@polk.caden",
+    href: "https://instagram.com/polk.caden",
     logo: "/logos/instagram.svg",
   },
   {
@@ -65,9 +65,9 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-[#888] text-base mb-8 leading-relaxed max-w-xl">
-            I&apos;m on everything as{" "}
-            <span className="text-[#f0f0f0]">@notrelaxedd</span>. Pick a
-            platform, or email me directly. Based in Rocky River, Ohio.
+            I&apos;m <span className="text-[#f0f0f0]">@notrelaxedd</span> almost
+            everywhere. Pick a platform, or email me directly. Based in Rocky
+            River, Ohio.
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">

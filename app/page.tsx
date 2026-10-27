@@ -11,8 +11,8 @@ export default function Home() {
       <Background />
       <Nav />
       <Hero />
-      <Projects />
       <About />
+      <Projects />
       <Contact />
     </main>
   );

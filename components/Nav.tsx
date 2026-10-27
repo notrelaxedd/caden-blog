@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const links = [
-  { label: "projects", href: "#projects" },
   { label: "about", href: "#about" },
+  { label: "projects", href: "#projects" },
   { label: "contact", href: "#contact" },
   { label: "pdf", href: "/Caden_Polk_Engineering_Portfolio.pdf", external: true },
 ];

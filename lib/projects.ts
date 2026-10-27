@@ -464,7 +464,7 @@ export const projects: Project[] = [
     summary:
       "A marketing site and back-office system for a lawn care crew in Northeast Ohio: quotes, scheduling, a crew app, and AI-drafted ads and quotes that the owner approves with one tap.",
     tags: ["Next.js", "Supabase", "Stripe", "Claude API", "Debian worker fleet"],
-    href: "https://github.com/notrelaxedd/emmetts-property-services",
+    href: "https://eodlawns.com",
     images: [],
     specs: [
       { label: "Role", value: "Designed and built the public site and the operations system behind it" },
